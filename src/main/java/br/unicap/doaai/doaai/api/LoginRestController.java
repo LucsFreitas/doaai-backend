@@ -3,6 +3,7 @@ package br.unicap.doaai.doaai.api;
 import br.unicap.doaai.doaai.api.resources.Credential;
 import br.unicap.doaai.doaai.domain.Doador;
 import br.unicap.doaai.doaai.domain.Usuario;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ public class LoginRestController {
     private LoginService loginService;
 
     @PostMapping("/login")
+    @ApiOperation(value = "Realiza o login do usuário")
     public ResponseEntity<Doador> login (@RequestBody Credential credential) {
 
         if (credential != null && credential.getLogin() != null) {
@@ -31,6 +33,7 @@ public class LoginRestController {
     }
 
     @PostMapping("/signup")
+    @ApiOperation(value = "Cadastra um novo usuário")
     public ResponseEntity<Doador> signup (@RequestBody Usuario user) {
 
         if (user == null){
