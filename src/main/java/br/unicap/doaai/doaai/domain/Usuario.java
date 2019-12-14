@@ -18,7 +18,7 @@ public class Usuario {
 
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Doador doador;
 
     public Long getId() {

@@ -19,6 +19,7 @@ public class Pedido {
     @ManyToOne
     private Doador doador;
 
+    @Column(columnDefinition="TEXT")
     private String textoPedido;
 
     public Long getId() {

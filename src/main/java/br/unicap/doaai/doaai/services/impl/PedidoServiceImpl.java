@@ -4,6 +4,7 @@ import br.unicap.doaai.doaai.domain.Pedido;
 import br.unicap.doaai.doaai.domain.Usuario;
 import br.unicap.doaai.doaai.repositories.PedidoRepository;
 import br.unicap.doaai.doaai.repositories.UsuarioRepository;
+import br.unicap.doaai.doaai.services.CriancaService;
 import br.unicap.doaai.doaai.services.LoginService;
 import br.unicap.doaai.doaai.services.PedidoService;
 import br.unicap.doaai.doaai.services.exceptions.ObjectNotFoundException;
@@ -21,6 +22,9 @@ public class PedidoServiceImpl implements PedidoService {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private CriancaService criancaService;
+
     @Override
     public Pedido findById(Long id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
@@ -35,7 +39,8 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public Pedido create(Pedido pedido) {
-        return pedidoRepository.save(pedido);
+        Pedido p = pedidoRepository.save(pedido);
+        return pedidoRepository.findById(p.getId()).orElse(null);
     }
 
     @Override

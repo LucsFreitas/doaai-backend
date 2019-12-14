@@ -18,7 +18,7 @@ public class Doador {
 
     private String nome;
 
-    private Date nascimento;
+    private Integer idade;
 
     private String bairro;
 
@@ -45,12 +45,12 @@ public class Doador {
         this.nome = nome;
     }
 
-    public Date getNascimento() {
-        return nascimento;
+    public Integer getIdade() {
+        return idade;
     }
 
-    public void setNascimento(Date nascimento) {
-        this.nascimento = nascimento;
+    public void setIdade(Integer idade) {
+        this.idade = idade;
     }
 
     public String getBairro() {

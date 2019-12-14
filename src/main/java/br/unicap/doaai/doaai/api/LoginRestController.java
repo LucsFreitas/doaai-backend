@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import br.unicap.doaai.doaai.services.LoginService;
@@ -19,27 +20,32 @@ public class LoginRestController {
 
     @PostMapping("/login")
     @ApiOperation(value = "Realiza o login do usuário")
-    public ResponseEntity<Doador> login (@RequestBody Credential credential) {
+    public ResponseEntity<Usuario> login (@RequestBody Credential credential) {
 
         if (credential != null && credential.getLogin() != null) {
             Usuario usuario = loginService.login(credential.getLogin(), credential.getSenha());
 
             if (usuario != null) {
-                return ResponseEntity.ok(usuario.getDoador());
+                usuario.setSenha(null);
+                usuario.setId(null);
+                return ResponseEntity.ok(usuario);
             }
         }
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/signup")
+    @PutMapping("/signup")
     @ApiOperation(value = "Cadastra um novo usuário")
-    public ResponseEntity<Doador> signup (@RequestBody Usuario user) {
+    public ResponseEntity<Credential> signup (@RequestBody Usuario user) {
 
         if (user == null){
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(loginService.create(user));
+        Usuario u = loginService.create(user);
+        Credential credential = new Credential();
+        credential.setLogin(u.getLogin());
+        return ResponseEntity.ok(credential);
     }
 }
 

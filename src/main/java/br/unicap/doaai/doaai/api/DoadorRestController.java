@@ -21,7 +21,7 @@ public class DoadorRestController {
         return ResponseEntity.ok().body(doadorService.findById(id));
     }
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value = "Cadastra um novo doador")
     public ResponseEntity<Doador> create (@RequestBody Doador doador) {
         return ResponseEntity.ok().body(doadorService.create(doador));

@@ -28,7 +28,7 @@ public class CriancaRestController {
         return ResponseEntity.ok().body(criancaService.findById(id));
     }
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value = "Cadastra uma nova criança")
     public ResponseEntity<Crianca> create (@RequestBody Crianca crianca) {
         return ResponseEntity.ok().body(criancaService.create(crianca));

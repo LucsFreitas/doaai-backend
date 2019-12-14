@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Doador create(Usuario usuario) {
+    public Usuario create(Usuario usuario) {
         Usuario existente = findByLogin(usuario.getLogin());
 
         if (existente != null) {
@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
             throw  new RuntimeException("O Login, Senha e o Doador devem ser informados.");
         }
 
-        return usuarioRepository.save(usuario).getDoador();
+        return usuarioRepository.save(usuario);
     }
 
     @Override

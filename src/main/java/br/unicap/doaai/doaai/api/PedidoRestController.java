@@ -31,7 +31,7 @@ public class PedidoRestController {
         return ResponseEntity.ok().body(pedidoService.findById(id));
     }
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value = "Cria um novo pedido")
     public ResponseEntity<Pedido> create (@RequestBody Pedido pedido) {
         return ResponseEntity.ok().body(pedidoService.create(pedido));
