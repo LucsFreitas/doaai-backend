@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,9 @@ public class Doador {
 
     @Column(unique=true)
     private String cpf;
+
+    @Email
+    private String email;
 
     @JsonIgnore
     @OneToMany(mappedBy = "doador")
@@ -74,5 +78,13 @@ public class Doador {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

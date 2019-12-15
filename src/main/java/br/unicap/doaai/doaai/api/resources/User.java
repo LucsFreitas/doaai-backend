@@ -16,6 +16,8 @@ public class User {
 
     private String cpf;
 
+    private String email;
+
     public String getLogin() {
         return login;
     }
@@ -64,12 +66,21 @@ public class User {
         this.cpf = cpf;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Usuario toEntity() {
         Doador doador = new Doador();
         doador.setNome(this.nome);
         doador.setIdade(this.idade);
         doador.setCpf(this.cpf);
         doador.setBairro(this.bairro);
+        doador.setEmail(this.email);
 
         Usuario usuario = new Usuario();
         usuario.setLogin(this.login);
