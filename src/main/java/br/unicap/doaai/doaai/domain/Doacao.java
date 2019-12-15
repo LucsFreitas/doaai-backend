@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-public class Pedido {
+public class Doacao {
     private static final long serialVersionUID = 1L;
 
     @Id

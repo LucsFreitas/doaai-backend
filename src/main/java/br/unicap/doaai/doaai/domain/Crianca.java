@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Crianca {
@@ -23,7 +22,7 @@ public class Crianca {
 
     @JsonIgnore
     @OneToOne(mappedBy = "crianca")
-    private Pedido pedido;
+    private Doacao doacao;
 
     public Long getId() {
         return id;
@@ -57,11 +56,11 @@ public class Crianca {
         this.bairro = bairro;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public Doacao getDoacao() {
+        return doacao;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setDoacao(Doacao doacao) {
+        this.doacao = doacao;
     }
 }

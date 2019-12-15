@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,7 +26,7 @@ public class Doador {
 
     @JsonIgnore
     @OneToMany(mappedBy = "doador")
-    private List<Pedido> pedido;
+    private List<Doacao> doacao;
 
     public Long getId() {
         return id;
@@ -61,12 +60,12 @@ public class Doador {
         this.bairro = bairro;
     }
 
-    public List<Pedido> getPedido() {
-        return pedido;
+    public List<Doacao> getDoacao() {
+        return doacao;
     }
 
-    public void setPedido(List<Pedido> pedido) {
-        this.pedido = pedido;
+    public void setDoacao(List<Doacao> doacao) {
+        this.doacao = doacao;
     }
 
     public String getCpf() {
