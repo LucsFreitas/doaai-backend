@@ -9,7 +9,11 @@ public interface DoacaoService {
 
     List<Doacao> findAll ();
 
+    List<Doacao> findPendings();
+
+    List<Doacao> findByDonator(Long doadorId);
+
     Doacao create (Doacao doacao);
 
-    Doacao donate (Long id, String login);
+    Doacao donate (Long doacaoId, Long doadorId);
 }

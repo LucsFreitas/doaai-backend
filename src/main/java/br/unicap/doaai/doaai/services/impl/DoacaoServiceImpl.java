@@ -1,10 +1,10 @@
 package br.unicap.doaai.doaai.services.impl;
 
 import br.unicap.doaai.doaai.domain.Doacao;
-import br.unicap.doaai.doaai.domain.Usuario;
+import br.unicap.doaai.doaai.domain.Doador;
 import br.unicap.doaai.doaai.repositories.DoacaoRepository;
 import br.unicap.doaai.doaai.services.CriancaService;
-import br.unicap.doaai.doaai.services.LoginService;
+import br.unicap.doaai.doaai.services.DoadorService;
 import br.unicap.doaai.doaai.services.DoacaoService;
 import br.unicap.doaai.doaai.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class DoacaoServiceImpl implements DoacaoService {
     private DoacaoRepository doacaoRepository;
 
     @Autowired
-    private LoginService loginService;
+    private DoadorService doadorService;
 
     @Autowired
     private CriancaService criancaService;
@@ -37,22 +37,34 @@ public class DoacaoServiceImpl implements DoacaoService {
     }
 
     @Override
+    public List<Doacao> findPendings() {
+        return this.doacaoRepository.findByDoador(null);
+    }
+
+    @Override
+    public List<Doacao> findByDonator(Long doadorId) {
+        Doador doador = new Doador();
+        doador.setId(doadorId);
+
+        return this.doacaoRepository.findByDoador(doador);
+    }
+
+    @Override
     public Doacao create(Doacao doacao) {
         Doacao p = doacaoRepository.save(doacao);
         return doacaoRepository.findById(p.getId()).orElse(null);
     }
 
     @Override
-    public Doacao donate(Long id, String login) {
-        Usuario usuario = loginService.findByLogin(login);
+    public Doacao donate(Long doacaoId, Long doadorId) {
+        Doador doador = doadorService.findById(doadorId);
 
-        if (usuario == null) {
+        if (doador == null) {
             throw  new RuntimeException("Usuario não encontrado.");
         }
 
-        Doacao doacao = this.findById(id);
-        doacao.setDoador(usuario.getDoador());
-
+        Doacao doacao = this.findById(doacaoId);
+        doacao.setDoador(doador);
         return doacaoRepository.save(doacao);
     }
 }

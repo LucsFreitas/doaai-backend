@@ -17,7 +17,7 @@ public class DoadorRestController {
     private DoadorService doadorService;
 
     @GetMapping()
-    @ApiOperation(value = "Busca todos os doador")
+    @ApiOperation(value = "Busca todos os doadores")
     public ResponseEntity<List<Doador>> findAll () {
         return ResponseEntity.ok().body(doadorService.findAll());
     }

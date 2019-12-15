@@ -1,8 +1,9 @@
 package br.unicap.doaai.doaai.api;
 
 import br.unicap.doaai.doaai.api.resources.Credential;
-import br.unicap.doaai.doaai.domain.Doador;
+import br.unicap.doaai.doaai.api.resources.User;
 import br.unicap.doaai.doaai.domain.Usuario;
+import br.unicap.doaai.doaai.services.UtilidadesServices;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,14 @@ public class LoginRestController {
 
     @PostMapping("/login")
     @ApiOperation(value = "Realiza o login do usuário")
-    public ResponseEntity<Usuario> login (@RequestBody Credential credential) {
+    public ResponseEntity<String> login (@RequestBody Credential credential) {
 
-        if (credential != null && credential.getLogin() != null) {
+        if (credential != null && !UtilidadesServices.isEmpty(credential.getLogin())
+                && !UtilidadesServices.isEmpty(credential.getSenha()) ) {
+
             Usuario usuario = loginService.login(credential.getLogin(), credential.getSenha());
-
             if (usuario != null) {
-                usuario.setSenha(null);
-                usuario.setId(null);
-                return ResponseEntity.ok(usuario);
+                return ResponseEntity.ok(usuario.getDoador().getId().toString());
             }
         }
 
@@ -37,15 +37,12 @@ public class LoginRestController {
 
     @PutMapping("/signup")
     @ApiOperation(value = "Cadastra um novo usuário")
-    public ResponseEntity<Credential> signup (@RequestBody Usuario user) {
-
+    public ResponseEntity signup (@RequestBody User user) {
         if (user == null){
             return ResponseEntity.badRequest().build();
         }
-        Usuario u = loginService.create(user);
-        Credential credential = new Credential();
-        credential.setLogin(u.getLogin());
-        return ResponseEntity.ok(credential);
+        loginService.create(user.toEntity());
+        return ResponseEntity.noContent().build();
     }
 }
 

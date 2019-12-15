@@ -5,6 +5,8 @@ public class Credential {
 
     private String senha;
 
+    private Long doadorId;
+
     public String getLogin() {
         return login;
     }
@@ -19,5 +21,13 @@ public class Credential {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Long getDoadorId() {
+        return doadorId;
+    }
+
+    public void setDoadorId(Long doadorId) {
+        this.doadorId = doadorId;
     }
 }

@@ -40,4 +40,10 @@ public class LoginServiceImpl implements LoginService {
     public Usuario findByLogin(String login) {
         return usuarioRepository.findByLogin(login).orElse(null);
     }
+
+    @Override
+    public Doador findDonatorByLogin(String login) {
+        Usuario usuario = usuarioRepository.findByLogin(login).orElse(null);
+        return usuario != null ? usuario.getDoador() : null;
+    }
 }
