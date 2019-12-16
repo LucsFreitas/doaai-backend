@@ -45,7 +45,7 @@ public class DoacaoRestController {
         return ResponseEntity.ok().body(doacaoService.create(doacao));
     }
 
-    @PostMapping("/{doacaoId}/donate")
+    @PostMapping("/{doacaoId}/doar")
     @ApiOperation(value = "Vincula a doação a um doador")
     public ResponseEntity<Doacao> donate (@PathVariable Long doacaoId, @RequestBody Credential credential) {
         if (credential != null) {
