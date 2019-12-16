@@ -10,8 +10,6 @@ public class User {
 
     private String nome;
 
-    private Integer idade;
-
     private String bairro;
 
     private String cpf;
@@ -42,14 +40,6 @@ public class User {
         this.nome = nome;
     }
 
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
     public String getBairro() {
         return bairro;
     }
@@ -77,7 +67,6 @@ public class User {
     public Usuario toEntity() {
         Doador doador = new Doador();
         doador.setNome(this.nome);
-        doador.setIdade(this.idade);
         doador.setCpf(this.cpf);
         doador.setBairro(this.bairro);
         doador.setEmail(this.email);
